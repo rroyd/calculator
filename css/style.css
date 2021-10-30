@@ -48,3 +48,7 @@ body {
 .button:hover {
     background-color: #a7a7a7;
 }
+
+.equals {
+    width: 100%;
+}

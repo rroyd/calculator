@@ -1,4 +1,5 @@
 const buttonsElement = document.querySelector(".buttons");
+const calcDisplay = document.querySelector(".display h1");
 let buttons = [
     {
         className: "AC",
@@ -53,16 +54,20 @@ let buttons = [
         text: "-"
     },
     {
-    className: "one",
-    text: 1
+        className: "one",
+        text: 1
     },
     {
-    className: "two",
-    text: 2
+        className: "two",
+        text: 2
     },
     {
-    className: "three",
-    text: 3
+        className: "three",
+        text: 3
+    },
+    {
+        className: "plus",
+        text: "+"
     },
     {
         className: "zero",
@@ -81,12 +86,25 @@ let buttons = [
 let display = "";
 let result = "";
 
+let buttonElements = [];
+
 buttons.forEach((button) => {
     let buttonToAppend = document.createElement("button");
     buttonToAppend.textContent = button.text;
     buttonToAppend.classList.add("button");
     buttonToAppend.classList.add(button.className);
+    buttonElements.push(buttonToAppend);
     buttonsElement.appendChild(buttonToAppend);
 });
 
+const numberElements = buttonElements.filter((button) => !isNaN(Number(button.textContent)));
+const expressionElements = buttonElements.filter((button) => ["+","-","%","/", "*"].some((exp) => exp == button.textContent));
+console.log(expressionElements)
+
+numberElements.forEach((number) => {
+    number.addEventListener('click', () => {
+        display += number.textContent;
+        calcDisplay.textContent =  display;
+    });
+});
 
